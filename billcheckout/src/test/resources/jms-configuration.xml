@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<minerva 
+	xmlns="http://www.auster.com.br/minerva">
+
+	
+	<listeners class="br.com.auster.minerva.jms.JMSRequestListener" count="1">
+		<configuration topic-name="topic/reportTopic" topic-factory="billcheckout.QueueConnectionFactory">
+			<jndi-properties>
+				<property name="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</property>
+			</jndi-properties>
+		</configuration>
+	</listeners>
+
+	<manager class="br.com.auster.minerva.billcheckout.BillcheckoutMinervaManagerBase">
+		<configuration pool-name="testdb" pool-size="5">
+			<!-- used pools -->
+			<sql:configuration xmlns:sql="http://www.auster.com.br/common/sql/">
+			    <sql:database name="testdb"/>
+		    </sql:configuration>
+		</configuration>
+		
+		<factory class="br.com.auster.minerva.core.impl.ReportFactoryBase">
+			<configuration>
+				<report name="billcheckout-portal" class="br.com.auster.minerva.csv.report.RowFlipCSVReport">
+					<configuration filename="query/query.xml"/>
+				</report>
+			</configuration>
+		</factory>
+	</manager>
+	
+	<dispatchers class="br.com.auster.minerva.billcheckout.report.DatabaseDispatcher" count="1">
+		<configuration pool-name="testdb"/>
+	</dispatchers>
+	
+</minerva>

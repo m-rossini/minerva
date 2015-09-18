@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<report-configuration name="ConsequenceCSVReport"
+	empty-message="Não existem dados para esse relatório.">
+   <report-query>
+		select 
+		   consequences.objid as "Billcheckout ID",
+		   rules.rule_name as "Nome da Regra", 
+		   cycles.cut_date as "Data de Fim do Ciclo",
+		   carriers.carrier_code as "Código da Operadora",
+		   carriers.carrier_state as "Estado",
+		   accounts.account_number as "CustCode",
+		   consequences.description as "Descrição",
+           consequenceAttributes.attr_name_1 as AttributeHeader1,
+           consequenceAttributes.attr_value_1 as AttributeValue1,
+           consequenceAttributes.attr_name_2 as AttributeHeader2,
+           consequenceAttributes.attr_value_2 as AttributeValue2,
+           consequenceAttributes.attr_name_3 as AttributeHeader3,
+           consequenceAttributes.attr_value_3 as AttributeValue3,
+           consequenceAttributes.attr_name_4 as AttributeHeader4,
+           consequenceAttributes.attr_value_4 as AttributeValue4,
+           consequenceAttributes.attr_name_5 as AttributeHeader5,
+           consequenceAttributes.attr_value_5 as AttributeValue5,
+           consequenceAttributes.attr_name_6 as AttributeHeader6,
+           consequenceAttributes.attr_value_6 as AttributeValue6,
+           consequenceAttributes.attr_name_7 as AttributeHeader7,
+           consequenceAttributes.attr_value_7 as AttributeValue7,
+           consequenceAttributes.attr_name_8 as AttributeHeader8,
+           consequenceAttributes.attr_value_8 as AttributeValue8,
+           consequenceAttributes.attr_name_9 as AttributeHeader9,
+           consequenceAttributes.attr_value_9 as AttributeValue9,
+           consequenceAttributes.attr_name_10 as AttributeHeader10,
+           consequenceAttributes.attr_value_10 as AttributeValue10,
+           consequenceAttributes.attr_name_11 as AttributeHeader11,
+           consequenceAttributes.attr_value_11 as AttributeValue11,
+           consequenceAttributes.attr_name_12 as AttributeHeader12,
+           consequenceAttributes.attr_value_12 as AttributeValue12,
+           consequenceAttributes.attr_name_13 as AttributeHeader13,
+           consequenceAttributes.attr_value_13 as AttributeValue13,
+           consequenceAttributes.attr_name_14 as AttributeHeader14,
+           consequenceAttributes.attr_value_14 as AttributeValue14,
+           consequenceAttributes.attr_name_15 as AttributeHeader15,
+           consequenceAttributes.attr_value_15 as AttributeValue15,
+           consequenceAttributes.attr_name_16 as AttributeHeader16,
+           consequenceAttributes.attr_value_16 as AttributeValue16,
+           consequenceAttributes.attr_name_17 as AttributeHeader17,
+           consequenceAttributes.attr_value_17 as AttributeValue17,
+           consequenceAttributes.attr_name_18 as AttributeHeader18,
+           consequenceAttributes.attr_value_18 as AttributeValue18,
+           consequenceAttributes.attr_name_19 as AttributeHeader19,
+           consequenceAttributes.attr_value_19 as AttributeValue19,
+           consequenceAttributes.attr_name_20 as AttributeHeader20,
+           consequenceAttributes.attr_value_20 as AttributeValue20
+		from   
+		   bck_rule rules, 
+	       bck_account_dm accounts, 
+		   bck_consequence consequences, 
+		   bck_carrier_dm carriers,
+		   bck_cycle_dm cycles,
+	       bck_consequence_attr consequenceAttributes
+	     where 
+	        rules.rule_code = $P{RULE_CODE} and
+			consequences.transaction_id = $P{TRANSACTION_ID} and 
+			consequences.rule_uid = rules.objid  and 
+			consequences.account_uid = accounts.objid and 
+		    consequences.cycle_uid = cycles.objid and 
+		    consequences.carrier_uid = carriers.objid and 
+			consequences.attribute_uid = consequenceAttributes.objid
+		 order by 
+	        consequences.objid,
+		    rules.rule_name, 
+	        accounts.account_number,
+	        cycles.cut_date,
+		    carriers.carrier_code,
+		    carriers.carrier_state, 
+	        consequences.description
+   </report-query>
+   <row-flip>
+	 <keys>
+	   <field name="Billcheckout ID"/>
+	   <field name="Nome da Regra"/>
+	   <field name="Data de Fim do Ciclo"/>
+	   <field name="Código da Operadora"/>
+	   <field name="Estado"/>
+	   <field name="CustCode"/>
+	   <field name="Descrição"/>
+	 </keys>
+	 <columns>
+	   <field header="AttributeHeader1" value="AttributeValue1"/>
+	   <field header="AttributeHeader2" value="AttributeValue2"/>
+	   <field header="AttributeHeader3" value="AttributeValue3"/>
+	   <field header="AttributeHeader4" value="AttributeValue4"/>
+	   <field header="AttributeHeader5" value="AttributeValue5"/>
+	   <field header="AttributeHeader6" value="AttributeValue6"/>
+	   <field header="AttributeHeader7" value="AttributeValue7"/>
+	   <field header="AttributeHeader8" value="AttributeValue8"/>
+	   <field header="AttributeHeader9" value="AttributeValue9"/>
+	   <field header="AttributeHeader10" value="AttributeValue10"/>
+	   <field header="AttributeHeader11" value="AttributeValue11"/>
+	   <field header="AttributeHeader12" value="AttributeValue12"/>
+	   <field header="AttributeHeader13" value="AttributeValue13"/>
+	   <field header="AttributeHeader14" value="AttributeValue14"/>
+	   <field header="AttributeHeader15" value="AttributeValue15"/>
+	   <field header="AttributeHeader16" value="AttributeValue16"/>
+	   <field header="AttributeHeader17" value="AttributeValue17"/>
+	   <field header="AttributeHeader18" value="AttributeValue18"/>
+	   <field header="AttributeHeader19" value="AttributeValue19"/>
+	   <field header="AttributeHeader20" value="AttributeValue20"/>
+	 </columns>
+   </row-flip>
+   <delimiter field=';' text='"'/>
+   <row-limit value='30000'/>
+   <file-pattern>/opt/billc/report/output/RELAT</file-pattern>
+</report-configuration>
+

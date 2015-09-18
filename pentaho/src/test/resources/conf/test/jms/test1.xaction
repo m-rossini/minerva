@@ -1,0 +1,26 @@
+<action-sequence>
+	<name>test1.xaction</name>
+	<logging-level>DEBUG</logging-level>
+	
+	<inputs>
+		<message-content type="string">
+			<default-value/>
+			<sources>
+				<request>message-content</request>
+			</sources>
+		</message-content>
+	</inputs>
+	<outputs/>
+	<resources/>
+	
+	<actions>
+		<action-definition>
+	       <action-inputs>
+              <message-content type="content"/>
+           </action-inputs>
+		   <component-name>br.com.auster.minerva.pentaho.jms.JMSSenderComponent</component-name>
+		   <component-definition/>
+		</action-definition>
+	</actions>
+	
+</action-sequence>

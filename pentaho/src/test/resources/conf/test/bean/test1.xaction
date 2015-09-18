@@ -1,0 +1,42 @@
+<action-sequence>
+	<name>test1.xaction</name>
+	<logging-level>INFO</logging-level>
+	
+	<inputs>
+		<name type="string">
+			<default-value/>
+			<sources>
+				<request>test1</request>
+			</sources>
+		</name>
+		<today type="content">
+			<sources>
+				<request>test2</request>
+			</sources>
+		</today>
+	</inputs>
+	<outputs/>
+	<resources/>
+	
+	<actions>
+		<action-definition>
+			<action-inputs>
+              	<name type="string"/>
+            	<today type="content"/>
+           	</action-inputs>
+           	<action-outputs>
+           		<result-bean type="content"/>
+           	</action-outputs>
+		   	<component-name>br.com.auster.minerva.pentaho.bean.BeanBuilderComponent</component-name>
+		   	<component-definition>
+		   		<bean-class>br.com.auster.minerva.pentaho.test.bean.SomeBean</bean-class>
+		   		<attribute-mapping>
+		   			<attribute name="name" type="input">name</attribute>
+		   			<attribute name="birthdate" type="input">today</attribute>
+		   			<attribute name="surrName" type="value">Ramos</attribute>
+		   		</attribute-mapping>		   		
+		   	</component-definition>
+		</action-definition>
+	</actions>
+	
+</action-sequence>

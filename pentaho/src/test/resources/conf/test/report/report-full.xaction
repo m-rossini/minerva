@@ -1,0 +1,83 @@
+<action-sequence>
+	<name>report-full.xaction</name>
+	<logging-level>DEBUG</logging-level>
+	
+	<inputs>
+		<output-name type="string">
+			<default-value>test.txt</default-value>
+			<sources>
+				<request>output-name</request>
+			</sources>
+		</output-name>
+		<parameters type="property-map">
+			<default-value type="property-map">
+				<property-map>
+					<entry key="text">This text will appear in the output file</entry>
+				</property-map>
+			</default-value>			
+		</parameters>
+	</inputs>
+	
+	<outputs>
+		<generated-file type="string-list"/>
+		<time-spent		type="string-list"/>
+		<result-bean    type="content"/>
+	</outputs>
+	
+	<resources/>
+
+	<actions>
+		<!-- report component -->
+		<action-definition>
+			<action-inputs>
+              	<output-name type="string"/>
+              	<output-dir  type="string"/>
+            	<parameters  type="property-map"/>
+           	</action-inputs>
+           	<action-outputs>
+				<generated-file type="string-list"/>
+				<time-spent		type="string-list"/>
+           	</action-outputs>
+		   	<component-name>br.com.auster.minerva.pentaho.jasper.JasperCompiledReportComponent</component-name>		   
+		   	<component-definition>
+				<report-definition name="some-name"
+									  report-class="br.com.auster.minerva.pentaho.test.jasper.SimpleReportGenerator"/>
+ 				
+				<datasource-configuration>
+					<driver>org.postgresql.Driver</driver>
+					<url>jdbc:postgresql://jean:5432/testdb</url>
+					<user>test</user>
+					<password>test</password>
+				</datasource-configuration>		   		
+		   </component-definition>
+		</action-definition>
+		
+		<!-- bean buider component -->
+		<action-definition>
+			<action-inputs>
+              	<files mapping="generated-file"/>
+            	<times mapping="time-spent"/>
+           	</action-inputs>
+           	<action-outputs>
+           		<result-bean type="content"/>
+           	</action-outputs>
+		   	<component-name>br.com.auster.minerva.pentaho.bean.BeanBuilderComponent</component-name>
+		   	<component-definition>
+		   		<bean-class>br.com.auster.minerva.pentaho.test.bean.ReportLog</bean-class>
+		   		<attribute-mapping>
+		   			<attribute name="filenames" type="input">files</attribute>
+		   			<attribute name="execTimes" type="input">times</attribute>
+		   		</attribute-mapping>		   		
+		   	</component-definition>
+		</action-definition>
+		
+		<!-- jms builder -->
+		<action-definition>
+	       <action-inputs>
+              <message-content mapping="result-bean"/>
+           </action-inputs>
+		   <component-name>br.com.auster.minerva.pentaho.jms.JMSSenderComponent</component-name>
+		   <component-definition/>
+		</action-definition>		
+	</actions>
+</action-sequence>

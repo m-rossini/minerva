@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+
+  <modelVersion>4.0.0</modelVersion>
+  
+  <name>Minerva Report for Billcheckout</name>
+  <artifactId>minerva-billcheckout</artifactId>
+  <groupId>auster</groupId>
+  <packaging>jar</packaging>
+  <url>https://jean/sites/${pom.groupId}/${pom.artifactId}-${pom.version}/index.html</url>
+
+  <version>1.2.1</version>
+
+  <organization>
+    <name>Auster Solutions</name>
+    <url>http://www.auster.com.br</url>
+  </organization>
+  <issueManagement>
+    <system>Trac</system>
+    <url>https://jean/projects/minerva</url>
+  </issueManagement>
+	  
+  <repositories>
+    <!-- Auster Central Repository -->
+    <repository>
+      <id>auster</id>
+      <name>Auster Central Repository</name>
+      <url>http://jean/repository</url>
+      <layout>legacy</layout>
+    </repository>
+  </repositories>
+  
+  <ciManagement>
+    <system>continuum</system>
+    <url>http://jean:8080/continuum/</url>
+    <notifiers>
+      <notifier>
+	  <type>mail</type>
+	  <configuration>
+	    <address>continuum@auster.com.br</address>
+        </configuration>
+	 </notifier>
+    </notifiers>
+  </ciManagement>  
+  
+  <scm>
+    <connection>scm:svn:svn://continuum@jean/auster/minerva/trunk/generator</connection>
+  </scm>
+	
+  <distributionManagement>
+    <repository>
+      <id>auster-central-repo</id>
+      <name>Auster Central Repository</name>
+      <url>file:///repository/maven-env/central-repository</url>
+      <layout>legacy</layout>
+    </repository>
+    <site>
+      <id>local-site</id>
+      <url>file:///repository/documentation/sites/${pom.groupId}/${pom.artifactId}-${pom.version}/</url>
+    </site>
+  </distributionManagement> 	
+  
+  <dependencies>
+    <dependency>
+		<groupId>auster</groupId>
+		<artifactId>auster-commons-base</artifactId>
+		<version>2.4.4</version>
+	  </dependency>
+    <dependency>
+        <groupId>auster</groupId>
+        <artifactId>minerva-core</artifactId>
+        <version>1.0.3</version>
+    </dependency>
+    <dependency>
+        <groupId>auster</groupId>
+        <artifactId>minerva-interfaces</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+	<dependency>
+		<groupId>oracle</groupId>
+		<artifactId>oracle-jdbc4</artifactId>
+		<version>10.2.0</version>
+	</dependency>		
+	<dependency>
+		<groupId>commons-pool</groupId>
+		<artifactId>commons-pool</artifactId>
+		<version>1.2</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-dbcp</groupId>
+		<artifactId>commons-dbcp</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>bea</groupId>
+	  <artifactId>weblogic</artifactId>
+	  <version>9.2.0</version>
+	</dependency>
+	  <!--	  
+	<dependency>
+	  <groupId>bea</groupId>
+	  <artifactId>wlclient</artifactId>
+	  <version>9.2.0</version>
+	</dependency>
+	<dependency>
+	  <groupId>bea</groupId>
+	  <artifactId>wljmsclient</artifactId>
+	  <version>9.2.0</version>
+	</dependency>
+		  -->
+  </dependencies>
+
+  <reporting>
+    <plugins>
+      <plugin>
+         <groupId>org.codehaus.mojo</groupId>
+         <artifactId>taglist-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+      <plugin>
+         <groupId>org.codehaus.mojo</groupId>
+         <artifactId>surefire-report-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+         <groupId>org.codehaus.mojo</groupId>
+         <artifactId>jxr-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <configuration>
+          <rulesets>
+            <ruleset>/rulesets/basic.xml</ruleset>
+            <ruleset>/rulesets/controversial.xml</ruleset>
+          </rulesets>
+ 		  <targetJdk>1.5</targetJdk>
+          <format>xml</format>
+          <linkXref>true</linkXref>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <minimumTokens>100</minimumTokens>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting> 
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <destDir>/repository/documentation/sites/${pom.groupId}/${pom.artifactId}-${pom.version}/jdocs/</destDir>
+          <linksource>true</linksource>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>			
+</project>
+

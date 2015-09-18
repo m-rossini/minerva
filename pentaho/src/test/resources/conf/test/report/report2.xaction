@@ -1,0 +1,64 @@
+<action-sequence>
+	<name>report2.xaction</name>
+	<logging-level>DEBUG</logging-level>
+	
+	<inputs>
+		<output-name type="string">
+			<default-value>test.txt</default-value>
+			<sources>
+				<request>output-name</request>
+			</sources>
+		</output-name>
+		<parameters type="property-map">
+			<default-value type="property-map">
+				<property-map>
+					<entry key="text">This text will appear in the output file</entry>
+				</property-map>
+			</default-value>			
+		</parameters>
+		<iterate-report type="property-map">
+			<default-value type="property-map">
+				<property-map>
+					<entry key="first-key">test1.txt</entry>
+					<entry key="second-key">test2.txt</entry>
+				</property-map>
+			</default-value>			
+		</iterate-report>
+	</inputs>
+	
+	<outputs>
+		<generated-file type="string-list"/>
+		<time-spent		type="string-list"/>
+	</outputs>
+	
+	<resources/>
+	
+	<actions>
+		<action-definition>
+			<action-inputs>
+              	<output-name type="string"/>
+              	<output-dir  type="string"/>
+            	<parameters  type="property-map"/>
+            	<iterate-report type="property-map"/>
+           	</action-inputs>
+           	<action-outputs>
+				<generated-file type="string-list"/>
+				<time-spent		type="string-list"/>
+           	</action-outputs>
+		   	<component-name>br.com.auster.minerva.pentaho.jasper.JasperCompiledReportComponent</component-name>		   
+		   	<component-definition>
+				<report-definition name="some-name"
+									  report-class="br.com.auster.minerva.pentaho.test.jasper.SimpleReportGenerator"
+									  iterate-item="it"/>
+ 				
+				<datasource-configuration>
+					<driver>org.postgresql.Driver</driver>
+					<url>jdbc:postgresql://jean:5432/testdb</url>
+					<user>test</user>
+					<password>test</password>
+				</datasource-configuration>		   		
+		   </component-definition>
+		</action-definition>
+	</actions>
+	
+</action-sequence>

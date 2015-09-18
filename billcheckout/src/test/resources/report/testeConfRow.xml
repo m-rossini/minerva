@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<report-configuration name="ConsequenceCSVReport"
+	empty-message="Não existem dados para esse relatório.RowFlipCSV.">
+   <report-query>
+			select 
+		  c.transaction_id as "Round",
+		  y.due_date as "DueDate",
+		  r.rule_code as "Rule", 
+		  a.account_number as "Account",
+		  t.attr_name as "Header", t.attr_value as "Value"
+			from bck_rule r, bck_consequence c,  bck_account_dm a, bck_cycle_dm y, bck_consequence_attr t
+			where r.rule_code=$P{RULE_CODE}
+			and y.due_date =$P{DUE_DATE}
+			and r.objid = c.rule_uid
+			and c.account_uid = a.objid
+			and c.cycle_uid = y.objid
+			and t.CONSEQUENCE_UID = c.objid
+			order by c.transaction_id, y.due_date,r.rule_code, a.account_number, t.attr_name 
+   </report-query>
+	 <row-flip>
+		 <keys>
+			 <field name="Round"/>			 
+			 <field name="DueDate"/>
+			 <field name="Rule"/>
+			 <field name="Account"/>
+		 </keys>
+		 <columns>
+			 <field header="Header" value="Value"/>
+		 </columns>
+	 </row-flip>
+   <delimiter field=';' text='"'/>
+   <row-limit value='33'/>
+</report-configuration>
+

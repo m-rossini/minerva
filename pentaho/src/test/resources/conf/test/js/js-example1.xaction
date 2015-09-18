@@ -1,0 +1,26 @@
+<action-sequence>
+	<name>js-example1.xaction</name>
+	
+	<inputs/>
+	<outputs/>
+	<resources/>
+	
+	<actions>
+		<action-definition>
+			<component-name>org.pentaho.component.JavascriptRule</component-name>
+				<action-outputs>
+					<rule-result type="string"/>
+				</action-outputs>
+				<component-definition>
+					<script><![CDATA[
+						function region() {
+							return "Central";
+						}
+						region();
+						]]>
+					</script>
+				</component-definition>
+		</action-definition>
+	</actions>
+	
+</action-sequence>

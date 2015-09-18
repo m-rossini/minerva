@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<minerva 
+	xmlns="http://www.auster.com.br/minerva">
+
+	
+	<listeners class="br.com.auster.minerva.pentaho.test.PentahoRequestGenerator" count="2">
+		<configuration number-of-requests="2" wait-interval="3"/>
+	</listeners>
+
+	<manager class="br.com.auster.minerva.core.impl.MinervaManagerBase">
+		<configuration/>
+		
+		<factory class="br.com.auster.minerva.pentaho.PentahoReportFactory">
+			<configuration>
+				<pentaho-file>src/test/resources/conf</pentaho-file>
+			</configuration>
+		</factory>
+	</manager>
+	
+</minerva>

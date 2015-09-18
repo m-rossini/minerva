@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="minerva" default="server.run">
+
+    <property environment="env"/>
+
+    <target name="server.run">
+
+		<path id="run.classpath">
+		   <fileset dir="${basedir}/lib" includes="*"/>
+		 </path>
+		 <java classname="br.com.auster.minerva.Bootstrap" 
+			   fork="yes"
+			   maxmemory="1024M"
+			   dir="${basedir}">
+		 
+			<jvmarg value="-server"/>
+			<jvmarg value="-Xms512M"/>
+			<sysproperty key="java.endorsed.dirs"
+						 value="${basedir}/lib/endorsed"/>
+      <arg value="-c"/>
+      <arg value="${configuration.file}"/>
+			<!--
+				Uncomment this argument to tell Bootstrap that the configuration file is encrypted 
+				
+	        <arg value="-s"/>
+			-->
+			<classpath>
+			   <path refid="run.classpath"/>
+			</classpath>
+		 </java>
+	</target>
+
+
+    <target name="server.help">
+
+		<path id="run.classpath">
+		   <fileset dir="${basedir}/lib" includes="*"/>
+		 </path>
+		 <java classname="br.com.auster.minerva.Bootstrap" 
+			   fork="yes"
+			   maxmemory="1024M"
+			   dir="${basedir}">
+			<sysproperty key="java.endorsed.dirs"
+						 value="${basedir}/lib/endorsed"/>
+			<classpath>
+			   <path refid="run.classpath"/>
+			</classpath>
+		 </java>
+	</target>
+    
+</project>

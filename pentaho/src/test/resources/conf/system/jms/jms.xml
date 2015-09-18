@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jms-sender>
+	<jndi.context.factory>org.jnp.interfaces.NamingContextFactory</jndi.context.factory>
+	<jndi.context.package>jboss.naming:org.jnp.interfaces</jndi.context.package>
+	<jndi.context.url>localhost:1099</jndi.context.url>
+	<jndi.jms.factory>ConnectionFactory</jndi.jms.factory>
+	<jndi.jms.name>queue/A</jndi.jms.name>
+	<component.retry.count>3</component.retry.count>
+	<component.retry.wait>5</component.retry.wait>
+</jms-sender>

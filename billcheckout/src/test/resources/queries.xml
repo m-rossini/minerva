@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<root>
+  <sql:configuration xmlns:sql="http://www.auster.com.br/common/sql/">
+		<sql:statements>
+			
+			<sql:statement name="report-list-query">
+				<sql:query> select rule_code, rule_name from bck_rule</sql:query>
+			</sql:statement>
+			
+		</sql:statements>
+		
+  </sql:configuration>
+</root>

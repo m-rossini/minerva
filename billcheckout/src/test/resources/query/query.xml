@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<report-configuration name="ConsequenceCSVReport"
+	empty-message="Não existem dados para esse relatório.">
+   <report-query>
+		select 
+		   consequences.objid as ConsequenceId,
+		   rules.rule_name as RuleCode, 
+		   accounts.account_number as AccountNumber,
+		   consequenceAttributes.attr_name_1 as AttributeHeader1, 
+	       consequenceAttributes.attr_value_1 as AttributeValue1,
+		   consequenceAttributes.attr_name_2 as AttributeHeader2, 
+	       consequenceAttributes.attr_value_2 as AttributeValue2,
+		   consequenceAttributes.attr_name_3 as AttributeHeader3, 
+	       consequenceAttributes.attr_value_3 as AttributeValue3,
+		   consequenceAttributes.attr_name_4 as AttributeHeader4, 
+	       consequenceAttributes.attr_value_4 as AttributeValue4,
+		   consequenceAttributes.attr_name_5 as AttributeHeader5, 
+	       consequenceAttributes.attr_value_5 as AttributeValue5,
+		   consequenceAttributes.attr_name_6 as AttributeHeader6, 
+	       consequenceAttributes.attr_value_6 as AttributeValue6,
+		   consequences.description as Descricao
+		from   
+		   bck_rule rules, 
+	       bck_account_dm accounts, 
+		   bck_consequence consequences, 
+	       bck_consequence_attr consequenceAttributes
+	     where 
+	        rules.rule_code = $P{RULE_CODE} and
+			consequences.transaction_id = $P{TRANSACTION_ID} and 
+			consequences.rule_uid = rules.objid  and 
+			consequences.account_uid = accounts.objid and 
+			consequences.attribute_uid = consequenceAttributes.objid 
+		 order by 
+	        consequences.objid,
+		    rules.rule_name, 
+	        accounts.account_number, 
+	        consequences.description
+   </report-query>
+   <row-flip>
+	 <keys>
+	   <field name="ConsequenceId" hide="true"/>
+	   <field name="RuleCode"/>
+	   <field name="AccountNumber"/>
+	   <field name="Descricao"/>
+	 </keys>
+	 <columns>
+	   <field header="AttributeHeader1" value="AttributeValue1"/>
+	   <field header="AttributeHeader2" value="AttributeValue2"/>
+	   <field header="AttributeHeader3" value="AttributeValue3"/>
+	   <field header="AttributeHeader4" value="AttributeValue4"/>
+	   <field header="AttributeHeader5" value="AttributeValue5"/>
+	   <field header="AttributeHeader6" value="AttributeValue6"/>
+	 </columns>
+   </row-flip>
+   <delimiter field=';' text='"'/>
+   <row-limit value='1000'/>
+   <file-pattern>C:/Temp/Reports</file-pattern>
+   <file-options file-extension="txt"/>
+</report-configuration>
+

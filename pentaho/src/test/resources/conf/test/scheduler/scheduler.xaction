@@ -1,0 +1,85 @@
+<action-sequence>
+
+    <name>scheduler.xaction</name>
+	<logging-level>DEBUG</logging-level>
+
+	<inputs>
+		<jobAction type="string">
+			<default-value>startJob</default-value>
+			<sources>
+				<request>jobAction</request>
+			</sources>
+		</jobAction>
+		<solution type="string">
+			<sources>
+				<request>solution</request>
+			</sources>
+		</solution>
+		<path type="string">
+			<sources>
+				<request>path</request>
+			</sources>
+		</path>
+		<action type="string">
+			<sources>
+				<request>action</request>
+			</sources>
+		</action>
+		<jobName type="string">
+			<sources>
+				<request>jobName</request>
+			</sources>
+		</jobName>
+		<triggerType type="string">
+	 	    <default-value>none</default-value>
+			<sources>
+				<request>triggerType</request>
+			</sources>
+		</triggerType>
+		<triggerName type="string">
+			<sources>
+				<request>triggerName</request>
+			</sources>
+		</triggerName>
+		<cronString type="string">
+			<default-value>0 0 0 0 0 0</default-value>
+			<sources>
+				<request>cronString</request>
+			</sources>
+		</cronString>
+		<repeatInterval type="string">
+			<default-value>0</default-value>
+			<sources>
+				<request>repeatInterval</request>
+			</sources>
+		</repeatInterval>
+		<repeatCount type="string">
+			<default-value>0</default-value>
+			<sources>
+				<request>repeatCount</request>
+			</sources>
+		</repeatCount>
+	</inputs>
+	<outputs/>
+	<resources/>
+  
+  <actions>
+      <action-definition>
+        <action-inputs>
+			<jobAction 		type="string"/>
+			<solution 		type="string"/>
+			<path 			type="string"/>
+			<action 		type="string"/>
+			<jobName 		type="string"/>
+			<triggerType 	type="string"/>
+			<triggerName 	type="string"/>
+			<cronString 	type="string"/>
+			<repeatInterval type="string"/>
+			<repeatCount 	type="string"/>
+        </action-inputs>
+        <component-name>org.pentaho.component.JobSchedulerComponent</component-name>
+      	<component-definition/>
+      </action-definition>
+  </actions>
+</action-sequence>
+

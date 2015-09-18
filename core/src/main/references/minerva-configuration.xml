@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<minerva:minerva 
+	xmlns:minerva="http://www.auster.com.br/minerva">
+
+	
+	<!--
+		Defines the listeners class and its configuration attributes
+	-->
+	<listeners class="..." count="...">
+		<configuration/>
+	</listeners>
+		
+	<!--
+		Defines the dispatchers class and its configuration attributes
+	-->
+	<dispatchers class="..." count="...">
+		<configuration/>
+	</dispatchers>
+		
+	<!--
+		Each Minerva environment will configure its own manager, defining the implementation classname.
+		This XML element, including all its content is passed to the defined class so it will read 
+			the inner elements according to its need. From this point on, the configuration is specific
+			per implementation.
+		
+		Although not enforced in code, the following tags should be used AS-IS to standarize the basics 
+			of a Minerva Manager implementation configuration.
+	-->	
+	<manager class="...">
+		<!--
+			Allows a set of properties, to be handled and used by the Manager implementation. This can be
+				name-value pairs or more complex structures.
+		-->
+		<configuration/>
+		<!--
+			Defines the Report Factory implementation to be used. The configuration sub-tag will be passed
+				to a newly created instance of the factory class, so it will be able to configure itself.
+		-->
+		<factory class="...">
+			<!--
+				Any configuration information needed by this implementation of the Report Factory interface.
+			-->
+			<configuration/>
+		</factory>
+	</manager>
+	
+</minerva:minerva>
